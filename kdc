@@ -16,6 +16,8 @@ KDC_HOST_NAME=${KDC_HOST_NAME:-'kdc'}
 KDC_NATHOST=${KDC_NATHOST:-'127.0.0.1'}
 # External KDC port.
 KDC_PORT=${KDC_PORT:-'48088'}
+# Docker network.
+KDC_NETWORK=${KDC_NETWORK:-'bridge'}
 # Config file.
 KDC_CONFIG=${KDC_CONFIG:-'kdc.json'}
 # Temmplates source dir.
@@ -134,6 +136,7 @@ function startDocker {
 		-p $KDC_PORT:88	 					\
 		-p $KDC_PORT:88/udp 					\
 		--name=$KDC_HOST_NAME 					\
+		--network=$KDC_NETWORK 					\
 		$DOCKERIMAGE
 
 	local KDC_HOST=`$GET_KDC_HOST`
